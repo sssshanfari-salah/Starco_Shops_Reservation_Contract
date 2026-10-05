@@ -1119,43 +1119,22 @@ class ShopReservationForm(tk.Tk):
             return
 
         self.client_manager.load_clients()
-        client = None
-        if target_name:
-            client = next((entry for entry in self.client_manager.clients if entry.name.strip().lower() == target_name.lower()), None)
-
         all_shop_numbers = [shop_number for shop_number, _ in shops]
         all_electricity = [electricity for _, electricity in shops if electricity]
 
-        if client is None:
-            client = Client(
-                target_name or "Unnamed Client",
-                contact_value.strip() or "",
-                business_value.strip() or "Reserved",
-                email=email_value.strip(),
-                shop_number=all_shop_numbers,
-                address=address_value.strip(),
-                electrical_meter=all_electricity,
-                notes=all_electricity,
-                contract_details=contract_details,
-                reservation_status=reservation_status,
-            )
-            self.client_manager.clients.append(client)
-        else:
-            client.name = target_name or client.name
-            client.contact = format_contact_number(
-                contact_value.strip() or client.contact,
-                DEFAULT_CONTACT_COUNTRY_CODE,
-            )
-            client.business = business_value.strip() or client.business
-            client.email = email_value.strip() or client.email
-            client.address = address_value.strip() or client.address
-            client.shop_number = all_shop_numbers
-            client.electrical_meter = all_electricity
-            client.notes = all_electricity
-            client.contract_details = contract_details
-            client.reservation_status = reservation_status
+        saved_client = self.client_manager.upsert_client(
+            client_name=target_name,
+            contact=contact_value.strip(),
+            business=business_value.strip(),
+            email=email_value.strip(),
+            shop_number=all_shop_numbers,
+            address=address_value.strip(),
+            electrical_meter=all_electricity,
+            notes=all_electricity,
+            contract_details=contract_details,
+            reservation_status=reservation_status,
+        )
 
-        self.client_manager.save_clients()
         self.save_contract_document()
         self.refresh_client_selector()
         if target_name:
