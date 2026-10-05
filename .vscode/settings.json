@@ -1,0 +1,9 @@
+{
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda",
+  "python.defaultInterpreterPath": "c:/Users/ssssh/OneDrive/Documents/documentatin management/.conda/python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.extraPaths": [
+    "c:/Users/ssssh/OneDrive/Documents/Marketing_booster_ar/python_code"
+  ]
+}

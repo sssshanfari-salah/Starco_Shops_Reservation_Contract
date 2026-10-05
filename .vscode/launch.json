@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Reservation Contract",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "python": "c:/Users/ssssh/OneDrive/Documents/documentatin management/.conda/python.exe",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true
+    }
+  ]
+}
